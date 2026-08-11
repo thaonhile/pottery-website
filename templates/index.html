@@ -1,50 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Nhi Creates</title>
-    {{ url_for('static', filename='style.css') }}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Made by Nhi Le</title>
+
 </head>
+
 <body>
 
-<header>
-    <h1>Nhi Creates</h1>
-    <p>Handmade Pottery & Art</p>
-</header>
+    <header>
+        <h1>Nhi Le</h1>
+        <p>Your Local Enthusiastic Potter</p>
+    </header>
 
-<section>
-    <h2>About Me</h2>
-    <p>
-        Welcome to Nhi Creates. I create handmade pottery
-        and unique art pieces crafted with care.
-    </p>
-</section>
+    <section>
+        <h2>About Me</h2>
+        <p>
+            Hi, I'm Nhi. Creating beauty one piece of pottery at a time.
+            Sharing my journey in clay, creativity, and everyday life.
+            Welcome to my page.
+        </p>
+    </section>
 
-<section>
-    <h2>Custom Orders Welcome</h2>
-    <p>
-        Looking for a personalized mug, bowl, planter,
-        or special gift? Contact me below.
-    </p>
-</section>
+    <section>
+        <h2>Custom Orders Welcome</h2>
+        <p>
+            Looking for a personalized mug, bowl, planter, vase, or special gift?
+            I'd love to help bring your ideas to life.
+        </p>
+    </section>
 
-<section>
-    <h2>Contact Me</h2>
+    <section>
+        <h2>Contact Me</h2>
 
-    <form>
+        <form>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
 
-        <label>Name</label>
-        <input type="text">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email">
 
-        <label>Email</label>
-        <input type="email">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5"></textarea>
 
-        <label>Message</label>
-        <textarea rows="5"></textarea>
-
-        <button>Send</button>
-
-    </form>
-</section>
+            <button type="submit">Send</button>
+        </form>
+    </section>
 
 </body>
+
 </html>
