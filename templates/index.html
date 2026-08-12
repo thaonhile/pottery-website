@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Made by Nhi Le</title>
 
-    <link rel="stylesheet" href="{{ url_.css') }}">
-
-
+    {{ url_for('static', filename='style.css') }}
 </head>
 
 <body>
@@ -17,30 +15,24 @@
         <div class="logo">Made by Nhi Le</div>
 
         <ul>
-
-
-
+            <li>#aboutAbout</a></li>
+            <li>#galleryGallery</a></li>
+            <li>#customCustom Orders</a></li>
+            <li>#contactContact</a></li>
         </ul>
     </nav>
 
     <section class="hero">
-        <div class="hero-text">
-            <h1>Handcrafted Pottery & Art</h1>
+        <h1>Handcrafted Pottery & Art</h1>
 
-            <p>
-                Creating beauty one piece at a time.
-                Handmade pottery inspired by everyday life,
-                nature, and creativity.
-            </p>
-        </div>
+        <p>
+            Creating beauty one piece at a time.
+            Handmade pottery inspired by everyday life,
+            nature, and creativity.
+        </p>
     </section>
 
     <section id="about">
-        <h2>About Me</h2>
-    </section>
-
- 
-
         <h2>About Me</h2>
 
         <p>
@@ -48,6 +40,7 @@
             functional and decorative ceramics with care and passion.
             Welcome to my pottery journey.
         </p>
+    </section>
 
     <section id="gallery">
         <h2>Gallery</h2>
@@ -71,12 +64,8 @@
         <h2>Contact Me</h2>
 
         <form>
-            <input type="text" placeholder="Name" required>
-
-            <input type="email" placeholder="Email" required>
-
-            <input type="text" placeholder="Phone Number">
-
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
             <textarea rows="5" placeholder="Tell me about your project"></textarea>
 
             <button type="submit">Send Message</button>
