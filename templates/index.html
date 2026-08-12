@@ -6,78 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Made by Nhi Le</title>
 
-    {{ url_for('static', filename='style.css') }}
+    <link rel="stylesheet" href="{{ url_.css') }}">
+
+
 </head>
 
 <body>
 
-<nav>
-    <div class="logo">Made by Nhi Le</div>
+    <nav>
+        <div class="logo">Made by Nhi Le</div>
 
-    <ul>
-        <li><aboutAbout</a></li>
-        <li><galleryGallery</a></li>
-        <li>#customCustom Orders</a></li>
-        <li><contactContact</a></li>
-    </ul>
-</nav>
+        <ul>
 
-<section class="hero">
-    <div class="hero-text">
-        <h1>Handcrafted Pottery & Art</h1>
-        <p>
-            Creating beauty one piece at a time.
-            Handmade pottery inspired by everyday life,
-            nature, and creativity.
-        </p>
-    </div>
 
-    <div class="hero-image">
-         }}"
-             alt="Handmade Pottery">
-    </div>
-</section>
 
-<section id="about">
-    <h2>About Me</h2>
-    <p>
-        Hi, I'm Nhi.
-        A local pottery enthusiast creating functional
-        and decorative ceramics with care and passion.
-    </p>
-</section>
+        </ul>
+    </nav>
 
-<section id="contact" class="contact-container">
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Handcrafted Pottery & Art</h1>
 
-    <div class="contact-text">
-        <h2>Let's Create Something Special</h2>
+            <p>
+                Creating beauty one piece at a time.
+                Handmade pottery inspired by everyday life,
+                nature, and creativity.
+            </p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+    </section>
+
+ 
+
+        <h2>About Me</h2>
 
         <p>
-            Whether you're looking for a personalized mug,
-            bowl, planter or gift, I'd love to hear your ideas.
+            Hi, I'm Nhi. A local pottery enthusiast creating
+            functional and decorative ceramics with care and passion.
+            Welcome to my pottery journey.
         </p>
-    </div>
 
-    <div class="contact-form">
+    <section id="gallery">
+        <h2>Gallery</h2>
+
+        <p>
+            Photos of my pottery creations coming soon.
+        </p>
+    </section>
+
+    <section id="custom">
+        <h2>Custom Orders Welcome</h2>
+
+        <p>
+            Looking for a personalized mug, bowl, planter,
+            vase, or special gift? I'd love to help bring
+            your ideas to life.
+        </p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
 
         <form>
-            <input type="text" placeholder="Name">
+            <input type="text" placeholder="Name" required>
 
-            <input type="email" placeholder="Email">
+            <input type="email" placeholder="Email" required>
 
             <input type="text" placeholder="Phone Number">
 
-            <textarea placeholder="Tell me about your project"></textarea>
+            <textarea rows="5" placeholder="Tell me about your project"></textarea>
 
-            <button type="submit">
-                SEND MESSAGE
-            </button>
-
+            <button type="submit">Send Message</button>
         </form>
-
-    </div>
-
-</section>
+    </section>
 
 </body>
 
