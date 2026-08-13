@@ -45,7 +45,7 @@ h1 {
 }
 
 form {
-    max-width: 500px;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -69,4 +69,138 @@ footer {
     text-align: center;
     padding: 20px;
     background: white;
+}
+
+.contact-page {
+    padding: 80px 30px;
+}
+
+.contact-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.contact-intro {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.contact-intro h1 {
+    margin-bottom: 15px;
+    color: #684638;
+    font-size: 2.8rem;
+}
+
+.contact-intro p {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-form {
+    width: 100%;
+    padding: 35px;
+    max-width: 500px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 30px rgba(72, 56, 47, 0.1);
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #463e39;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cfc5bd;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #a86553;
+    outline: 2px solid rgba(168, 101, 83, 0.2);
+}
+
+.contact-form button {
+    width: 100%;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-color: #b87866;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #925846;
+}
+
+@media (max-width: 600px) {
+    .contact-page {
+        padding: 80px 30px;
+    }
+
+    .contact-container {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .contact-intro {
+        margin-bottom: 35px;
+        text-align: center;
+    }
+
+    form.contact-form {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 35px;
+        border-radius: 8px;
+        background-color: #ffffff;
+        box-shadow: 0 10px 30px rgba(72, 56, 47, 0.1);
+    }
+}
+
+/* Custom order introduction */
+.contact-intro .eyebrow {
+    color: #b8664f;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+/* Space below the main heading */
+.contact-intro h1 {
+    margin-bottom: 20px;
+}
+
+/* Description below Custom Orders Welcome */
+.contact-description {
+    max-width: 650px;
+    margin: 0 auto 18px;
+    line-height: 1.6;
+}
+
+/* Response-time message */
+.response-note {
+    margin-top: 18px;
+    color: #8a6b5e;
+    font-size: 0.9rem;
 }

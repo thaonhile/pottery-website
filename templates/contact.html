@@ -1,18 +1,65 @@
 {% extends "base.html" %}
 
-{% block content %}
-<h1>Contact Me</h1>
-
-<form method="POST">
-    <label>Name</label>
-    <input type="text" name="name" required>
-
-    <label>Email</label>
-    <input type="email" name="email" required>
-
-    <label>Message</label>
-    <textarea name="message" required></textarea>
-
-    <button type="submit">Send Message</button>
-</form>
+{% block title %}
+Contact Me | Made by Nhi Le
 {% endblock %}
+
+{% block content %}
+
+<section class="contact-page">
+    <div class="contact-container">
+        <div class="contact-intro">
+            
+            <h1>Contact Me</h1>
+            <p class="eyebrow">Custom Orders Welcome</p>
+            <p>
+               Have an idea for a custom pottery piece? Tell me about the item,
+                colors, size, and style you have in mind. I would love to help
+                bring your idea to life.
+            </p>
+            <p class="response-note">
+                Please allow 1–2 business days for a response.
+            </p>
+        </div>
+
+        <form class="contact-form" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="message">Message</label>
+
+                <textarea
+                    id="message"
+                    name="message"
+                    rows="6"
+                    required
+                ></textarea>
+            </div>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+
