@@ -18,7 +18,9 @@ app.secret_key = "your-secret-key"
 def home():
     return render_template("home.html")
 
-
+@app.route("/gallery")
+def gallery():
+    return render_template("gallery.html")
 
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
