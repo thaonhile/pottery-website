@@ -1,3 +1,5 @@
+
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -5,10 +7,196 @@ Home | Made by Nhi Le
 {% endblock %}
 
 {% block content %}
+
+<!-- Hero Section -->
 <section class="hero">
     <div class="page-container">
         <p class="eyebrow">Handmade with care</p>
+
         <h1>Handcrafted Pottery and Art</h1>
+
+        <p class="hero-description">
+            Creating thoughtful, one-of-a-kind pottery inspired by
+            creativity, nature, and everyday life.
+        </p>
+
+        <div class="hero-buttons">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('gallery') }}">Explore My Work</a></li>
+                <li><a href="{{ url_for('contact') }}">Request a Custom Order</a></li>
+            </ul>
+            
+        </div>
     </div>
 </section>
+
+<!-- About Section -->
+<section class="home-section">
+    <div class="page-container two-column-section">
+        <div>
+            <p class="eyebrow">Meet the maker</p>
+
+            <h2>Welcome to Made by Nhi Le</h2>
+
+            <p>
+                Hi, I'm Nhi—your local enthusiastic potter. I create
+                functional and decorative pottery, including mugs,
+                bowls, planters, vases, and unique handmade gifts.
+            </p>
+
+            <p>
+                Every piece is thoughtfully created by hand, giving
+                each item its own individual character.
+            </p>
+
+
+        </div>
+
+        <div class="image-placeholder">
+            <p>Artist or studio photo coming soon</p>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Work Section -->
+<section class="home-section featured-section">
+    <div class="page-container">
+        <div class="section-heading">
+            <p class="eyebrow">Featured work</p>
+            <h2>Pottery for Everyday Life</h2>
+
+            <p>
+                Explore functional and decorative pieces designed
+                to bring warmth and creativity into your home.
+            </p>
+        </div>
+
+        <div class="featured-grid">
+            <article class="featured-card">
+                <div class="card-image-placeholder">
+                    <p>Mug photo</p>
+                </div>
+
+                <div class="card-content">
+                    <h3>Handmade Mugs</h3>
+                    <p>
+                        Comfortable, functional mugs made for coffee,
+                        tea, and quiet moments.
+                    </p>
+                </div>
+            </article>
+
+            <article class="featured-card">
+                <div class="card-image-placeholder">
+                    <p>Bowl photo</p>
+                </div>
+
+                <div class="card-content">
+                    <h3>Bowls</h3>
+                    <p>
+                        Unique handmade bowls for serving, decorating,
+                        or enjoying every day.
+                    </p>
+                </div>
+            </article>
+
+            <article class="featured-card">
+                <div class="card-image-placeholder">
+                    <p>Planter photo</p>
+                </div>
+
+                <div class="card-content">
+                    <h3>Planters</h3>
+                    <p>
+                        Handcrafted homes for your favorite plants
+                        and indoor spaces.
+                    </p>
+                </div>
+            </article>
+        </div>
+
+    </div>
+</section>
+
+<!-- Custom Orders Section -->
+<section class="custom-order-section">
+    <div class="page-container custom-order-content">
+        <p class="eyebrow">Custom orders welcome</p>
+
+        <h2>Made Especially for You</h2>
+
+        <p>
+            Looking for a personalized mug, serving bowl, planter,
+            vase, or meaningful handmade gift? Share your preferred
+            colors, size, style, and timeline, and let's create
+            something special.
+        </p>
+
+
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="home-section">
+    <div class="page-container">
+        <div class="section-heading">
+            <p class="eyebrow">The creative process</p>
+            <h2>From an Idea to a Finished Piece</h2>
+        </div>
+
+        <div class="process-grid">
+            <article class="process-step">
+                <span>01</span>
+                <h3>Share Your Idea</h3>
+                <p>
+                    Tell me about the item, colors, size, and style
+                    you have in mind.
+                </p>
+            </article>
+
+            <article class="process-step">
+                <span>02</span>
+                <h3>Create</h3>
+                <p>
+                    Your pottery piece is carefully formed and refined
+                    by hand.
+                </p>
+            </article>
+
+            <article class="process-step">
+                <span>03</span>
+                <h3>Glaze and Fire</h3>
+                <p>
+                    Glaze is applied before the piece completes its
+                    final kiln firing.
+                </p>
+            </article>
+
+            <article class="process-step">
+                <span>04</span>
+                <h3>Ready for You</h3>
+                <p>
+                    The finished creation is prepared for pickup,
+                    delivery, or shipping.
+                </p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<!-- Final Call to Action -->
+<section class="home-cta">
+    <div class="page-container">
+        <h2>Let's Create Something Special</h2>
+
+        <p>
+            Have a pottery idea or a question about an available piece?
+            I would love to hear from you.
+        </p>
+
+    </div>
+</section>
+
 {% endblock %}
+
+
