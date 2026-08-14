@@ -1,14 +1,116 @@
 {% extends "base.html" %}
 
-{% block title %}Gallery{% endblock %}
+{% block title %}
+Gallery | Made by Nhi Le
+{% endblock %}
 
 {% block content %}
-<section>
-    <h1>Gallery</h1>
 
-    <p>
-        Photos of mugs, bowls, planters, and custom pieces
-        will appear here.
-    </p>
+<section class="gallery-page">
+
+    <!-- Gallery Hero -->
+    <div class="gallery-hero">
+
+        <img
+            src="{{ url_for('static', filename='images/gallery-hero.jpg') }}"
+            alt="Handmade pottery collection by Nhi Le"
+            class="gallery-hero-image"
+        >
+
+        <div class="gallery-hero-statement">
+            <p class="gallery-eyebrow">Made by Hand</p>
+
+            <h1>Beauty Lives in the Details.</h1>
+
+            <p>
+                Thoughtful ceramic pieces made to bring warmth,
+                personality, and function into everyday spaces.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Gallery Introduction -->
+    <div class="gallery-introduction">
+
+        <p class="gallery-eyebrow">Explore My Work</p>
+
+        <h2>Handmade Ceramics for Your Home</h2>
+
+        <p>
+            Browse functional pottery, decorative pieces, and creations
+            from my Customizing My Apartment series. Because every item
+            is handmade, each piece has its own natural variations in
+            shape, texture, and glaze.
+        </p>
+
+    </div>
+
+
+    <!-- Collection Categories -->
+    <div class="gallery-category-grid">
+
+        <article class="gallery-category-card">
+            <h2 class="gallery-category-title">Dinnerware</h2>
+
+            <div class="gallery-category-image">
+                <img
+                    src="{{ url_for('static', filename='images/dinnerware.jpg') }}"
+                    alt="Handmade ceramic dinnerware"
+                >
+            </div>
+
+            <div class="gallery-category-content">
+                <p>
+                    Handmade mugs, bowls, plates, and serving pieces
+                    designed for everyday use.
+                </p>
+            </div>
+        </article>
+
+
+        <article class="gallery-category-card">
+            <h2 class="gallery-category-title">Home Essentials</h2>
+
+            <div class="gallery-category-image">
+                <img
+                    src="{{ url_for('static', filename='images/home-essentials.jpg') }}"
+                    alt="Handmade ceramic home essentials"
+                >
+            </div>
+
+            <div class="gallery-category-content">
+                <p>
+                    Functional ceramics such as lotion dispensers,
+                    olive oil bottles, coasters, and organizers.
+                </p>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+<section class="custom-home-cta">
+    <div class="custom-home-cta-content">
+
+        <p class="section-eyebrow">Custom Orders Welcome</p>
+
+        <h2>Made Especially for Your Space</h2>
+
+        <p>
+            See something that would feel at home in your space?
+            Ask about a custom piece made specifically for you.
+        </p>
+
+        <a
+            href="{{ url_for('contact') }}"
+            class="about-button"
+        >
+            Request a Custom Piece
+            <span aria-hidden="true">→</span>
+        </a>
+
+    </div>
 </section>
 {% endblock %}

@@ -4,17 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Made by Nhi Le{% endblock %}</title>
-    <!-- Link to static CSS file -->
+
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='favicon.jpg') }}">
 </head>
 <body>
     <header class="site-header">
         <nav class="navbar">
-            <a href="{{ url_for('home') }}">Made by Nhi Le</a>
+
+            <a href="{{ url_for('home') }}" class="logo">
+                <img
+                    src="{{ url_for('static', filename='logo.jpg') }}"
+                    alt="Made by Nhi Le logo"
+                    class="logo-image"
+                >
+                <span>Made by Nhi Le</span>
+            </a>
+
             <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}">Home</a></li>
-                <li><a href="{{ url_for('contact') }}">Contact Me</a></li>
+                <li><a href="{{ url_for('home') }}"
+                        class="{% if request.endpoint == 'home' %}active{% endif %}">Home
+                    </a>
+                </li>
+
+                <li><a href="{{ url_for('about') }}"
+                        class="{% if request.endpoint == 'about' %}active{% endif %}">About
+                    </a>
+                </li>
+                <li><a href="{{ url_for('gallery') }}"
+                        class="{% if request.endpoint == 'gallery' %}active{% endif %}">Gallery
+                    </a>
+                </li>
+
+                <li><a href="{{ url_for('contact') }}"
+                        class="{% if request.endpoint == 'contact' %}active{% endif %}">Contact Me
+                    </a>
+                </li>
             </ul>
+
+
         </nav>
     </header>
 
