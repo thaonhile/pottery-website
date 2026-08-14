@@ -22,6 +22,10 @@ def home():
 def gallery():
     return render_template("gallery.html")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':

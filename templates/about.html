@@ -1,14 +1,141 @@
 {% extends "base.html" %}
 
-{% block title %}About{% endblock %}
+{% block title %}
+About Me | Made by Nhi Le
+{% endblock %}
 
 {% block content %}
-<section>
-    <h1>About Me</h1>
 
-    <p>
-        Hi, I'm Nhi. I enjoy creating handmade pottery and
-        sharing my creative journey.
-    </p>
+<section class="about-section">
+    <div class="about-container">
+        <p class="about-eyebrow">About the Artist</p>
+        <h1> Hi, I’m Nhi</h1>
+
+        <div class="about-content">
+            <div class="about-image">
+                <img
+                    src="{{ url_for('static', filename='nhi-1.jpg') }}"
+                    alt="Photo of Nhi"
+                    class="about-photo"
+                >
+            </div>
+
+            <div class="about-text">
+                <p>
+                    I’m a local pottery enthusiast who enjoys transforming simple ideas
+                    into meaningful, handmade pieces. My pottery journey is rooted in
+                    creativity, curiosity, and a love for making everyday spaces feel
+                    more personal. I create functional and decorative ceramics, including
+                    mugs, bowls, planters, vases, and one-of-a-kind pieces.
+                </p>
+
+                <p>
+                    Because each piece is shaped and finished by hand, no two creations
+                    are exactly alike. The small variations in form, texture, and glaze
+                    are part of what makes handmade pottery distinctive.
+                </p>
+            </div>
+        </div>
+
+    </div>
 </section>
+
+
+<section class="series-section">
+    <div class="series-container">
+
+        <h1>My Creative Series</h1>
+
+        <div class="series-content">
+            <div class="series-image">
+                <img
+                    src="{{ url_for('static', filename='nhi-2.jpg') }}"
+                    alt="Photo of Nhi working on her pottery"
+                    class="series-photo"
+                >
+            </div>
+
+            <div class="series-text">
+                <p>
+                    My <strong>Customizing My Apartment</strong> series began
+                    as a personal project to make my living space feel more
+                    intentional, creative, and uniquely mine.
+                </p>
+
+                <p>
+                    Through this series, I design and create pottery and art
+                    for different areas of my apartment. Each project begins
+                    with a simple question: How can I make this space more
+                    functional, beautiful, and personal?
+                </p>
+
+                <p>
+                    The series may include handmade coasters, dinnerware,
+                    lotion dispensers, olive oil bottles, and other creations
+                    inspired by the needs of my home. It allows me to combine
+                    my love for ceramics and creativity while surrounding
+                    myself with meaningful, handmade pieces that I can enjoy
+                    and use every day.
+                </p>
+
+                <p>
+                    More than a decorating project, this series documents my
+                    creative process—from the initial idea and clay selection
+                    to forming, glazing, firing, and finally placing the
+                    finished piece in its new home.
+                </p>
+
+                <blockquote>
+                    “Creating a home that feels personal, one handmade piece
+                    at a time.”
+                </blockquote>
+                <a href="{{ url_for('gallery') }}" class="about-button">View My Work</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<section class="instagram-section">
+    <div class="instagram-container">
+
+
+        <h2>
+            Stay Up to Date with 
+            My Latest Creations
+        </h2>
+
+        <div class="instagram-visual">
+
+
+
+            <!-- QR Code -->
+            <a
+                href="https://www.instagram.com/nhi.ceramics/"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <img
+                    src="{{ url_for('static', filename='instagram-qr.jpg') }}"
+                    alt="QR code linking to the Made by Nhi Le Instagram profile"
+                    class="instagram-qr-image"
+                >
+            </a>
+
+        </div>
+
+        <p class="instagram-message">
+            Follow my pottery journey, discover new creations,
+            and see the latest pieces from my Customizing My Apartment series.
+        </p>
+
+ 
+
+    </div>
+</section>
+
+
 {% endblock %}
