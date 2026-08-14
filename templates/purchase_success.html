@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+Purchase Request Received | Made by Nhi Le
+{% endblock %}
+
+{% block content %}
+
+<section class="purchase-success-page">
+
+    <div class="purchase-success-content">
+
+        <p class="purchase-eyebrow">
+            Request Received
+        </p>
+
+        <h1>
+            Thank You, {{ customer_name }}!
+        </h1>
+
+        <p>
+            Your request for
+            <strong>{{ product.name }}</strong>,
+            SKU <strong>{{ product.sku }}</strong>,
+            has been received.
+        </p>
+
+        <p>
+            I will review your request and follow up at
+            <strong>{{ customer_email }}</strong>
+            to confirm availability, fulfillment options,
+            and payment details.
+        </p>
+
+        <p class="purchase-note">
+            No payment has been collected.
+        </p>
+
+        <div class="purchase-success-links">
+
+            <a
+                href="{{ url_for('home') }}"
+                class="purchase-submit-button"
+            >
+                Return to Gallery
+            </a>
+
+            <a
+                href="{{ url_for('product_detail', slug=product.slug) }}"
+                class="purchase-back-link"
+            >
+                Return to Item
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

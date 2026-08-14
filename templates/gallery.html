@@ -49,46 +49,50 @@ Gallery | Made by Nhi Le
 
 
     <!-- Collection Categories -->
-    <div class="gallery-category-grid">
+    <div class="product-grid">
+    {% for product in products %}
 
-        <article class="gallery-category-card">
-            <h2 class="gallery-category-title">Dinnerware</h2>
+    <article class="product-card">
 
-            <div class="gallery-category-image">
+        <a href="{{ url_for('product_detail', slug=product.slug) }}">
+            <div class="product-image">
                 <img
-                    src="{{ url_for('static', filename='images/dinnerware.jpg') }}"
-                    alt="Handmade ceramic dinnerware"
+                    src="{{ url_for('static', filename=product.image) }}"
+                    alt="{{ product.name }}"
                 >
             </div>
+        </a>
 
-            <div class="gallery-category-content">
-                <p>
-                    Handmade mugs, bowls, plates, and serving pieces
-                    designed for everyday use.
-                </p>
-            </div>
-        </article>
+        <div class="product-information">
+            <h2 class="product-name">
+                {{ product.name }}
+            </h2>
 
+            <p class="product-price">
+                ${{ "%.2f"|format(product.price) }}
+            </p>
 
-        <article class="gallery-category-card">
-            <h2 class="gallery-category-title">Home Essentials</h2>
-
-            <div class="gallery-category-image">
-                <img
-                    src="{{ url_for('static', filename='images/home-essentials.jpg') }}"
-                    alt="Handmade ceramic home essentials"
+            {% if product.available %}
+                <a
+                    href="{{ url_for('product_detail', slug=product.slug) }}"
+                    class="product-cart-button"
                 >
-            </div>
+                    View Item
+                </a>
+            {% else %}
+                <a
+                    href="{{ url_for('contact') }}"
+                    class="product-cart-button product-sold-button"
+                >
+                    Request Similar Piece
+                </a>
+            {% endif %}
+        </div>
 
-            <div class="gallery-category-content">
-                <p>
-                    Functional ceramics such as lotion dispensers,
-                    olive oil bottles, coasters, and organizers.
-                </p>
-            </div>
-        </article>
+    </article>
 
-    </div>
+    {% endfor %}
+</div>
 
 </section>
 <section class="custom-home-cta">
@@ -96,7 +100,7 @@ Gallery | Made by Nhi Le
 
         <p class="section-eyebrow">Custom Orders Welcome</p>
 
-        <h2>Made Especially for Your Space</h2>
+        <h2>Made Specifically for Your Space</h2>
 
         <p>
             See something that would feel at home in your space?
