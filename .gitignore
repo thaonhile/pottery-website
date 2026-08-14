@@ -4,3 +4,4 @@ push-error.txt
 push-error.txt
 __pycache__/
 *.pyc
+.env
