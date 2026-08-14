@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block title %}
+Purchase Request | {{ product.name }}
+{% endblock %}
+
+{% block content %}
+
+<section class="purchase-request-page">
+    <div class="purchase-request-container">
+
+        <!-- Product Summary -->
+
+        <div class="purchase-product-summary">
+
+            <div class="purchase-product-image">
+                <img
+                    src="{{ url_for('static', filename=product.image) }}"
+                    alt="{{ product.name }}"
+                >
+            </div>
+
+            <div class="purchase-product-information">
+
+                <p class="purchase-eyebrow">
+                    Purchase Request
+                </p>
+
+                <h1>{{ product.name }}</h1>
+
+                <p class="purchase-product-sku">
+                    SKU: {{ product.sku }}
+                </p>
+
+                <p class="purchase-product-price">
+                    ${{ "%.2f"|format(product.price|float) }}
+                </p>
+
+                {% if product.description %}
+                    <p>
+                        {{ product.description }}
+                    </p>
+                {% endif %}
+
+                <p class="purchase-note">
+                    Submitting this form does not complete a purchase.
+                    Availability, pickup or shipping, final pricing,
+                    and payment arrangements will be confirmed before
+                    the order is finalized.
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- Purchase Form -->
+
+        <div class="purchase-form-area">
+
+            <div class="purchase-form-heading">
+
+                <p class="purchase-eyebrow">
+                    Interested in this piece?
+                </p>
+
+                <h2>Submit a Purchase Request</h2>
+
+                <p>
+                    Complete the form below, and I will contact you
+                    to confirm availability and next steps.
+                </p>
+
+            </div>
+
+            <form
+                method="post"
+                action="{{ url_for('purchase_request', slug=product.slug) }}"
+                class="purchase-request-form"
+            >
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="product_name">
+                            Item
+                        </label>
+
+                        <input
+                            id="product_name"
+                            type="text"
+                            value="{{ product.name }}"
+                            readonly
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sku">
+                            SKU number
+                        </label>
+
+                        <input
+                            id="sku"
+                            type="text"
+                            value="{{ product.sku }}"
+                            readonly
+                        >
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Your name
+                    </label>
+
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        value="{{ request.form.get('name', '') }}"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email address
+                    </label>
+
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value="{{ request.form.get('email', '') }}"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        Phone number
+                    </label>
+
+                    <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value="{{ request.form.get('phone', '') }}"
+                        autocomplete="tel"
+                    >
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="quantity">
+                            Quantity
+                        </label>
+
+                        <input
+                            id="quantity"
+                            name="quantity"
+                            type="number"
+                            value="{{ request.form.get('quantity', '1') }}"
+                            min="1"
+                            max="10"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="fulfillment">
+                            Preferred fulfillment
+                        </label>
+
+                        <select
+                            id="fulfillment"
+                            name="fulfillment"
+                            required
+                        >
+                            <option value="">
+                                Select an option
+                            </option>
+
+                            <option
+                                value="Local pickup"
+                                {% if request.form.get('fulfillment') == 'Local pickup' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Local pickup
+                            </option>
+
+                            <option
+                                value="Shipping"
+                                {% if request.form.get('fulfillment') == 'Shipping' %}
+                                    selected
+                                {% endif %}
+                            >
+                                Shipping
+                            </option>
+
+                            <option
+                                value="Discuss options"
+                                {% if request.form.get('fulfillment') == 'Discuss options' %}
+                                    selected
+                                {% endif %}
+                            >
+                                I would like to discuss options
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Questions or special requests
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        placeholder="Please include any questions, color preferences, timing needs, or other details."
+                    >{{ request.form.get('message', '') }}</textarea>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="purchase-submit-button"
+                >
+                    Submit Purchase Request
+                </button>
+
+                <p class="purchase-form-note">
+                    No payment information is collected through this form.
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

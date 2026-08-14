@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ product.name }} | Made by Nhi Le
+{% endblock %}
+
+{% block content %}
+
+<section class="product-detail-page">
+
+    <div class="product-navigation">
+
+        <nav class="product-breadcrumbs" aria-label="Breadcrumb">
+            <a href="{{ url_for('home') }}">Home</a>
+
+            <span aria-hidden="true">›</span>
+
+            <a href="{{ url_for('gallery') }}">All Products</a>
+
+            <span aria-hidden="true">›</span>
+
+            <span>{{ product.name }}</span>
+        </nav>
+
+        
+
+    </div>
+
+    <div class="product-detail-container">
+        <div class="product-detail-image">
+            <img
+                src="{{ url_for('static', filename=product.image) }}"
+                alt="{{ product.name }}"
+            >
+        </div>
+
+        <div class="product-detail-information">
+
+            <p class="product-detail-category">
+                {{ product.category }}
+            </p>
+
+            <h1>{{ product.name }}</h1>
+
+            <p class="product-sku">
+                SKU: {{ product.sku }}
+            </p>
+
+            <p class="product-detail-price">
+                ${{ "%.2f"|format(product.price) }}
+            </p>
+
+            <div class="product-detail-description">
+                <p>{{ product.description }}</p>
+
+                {% if product.details %}
+                    <details class="product-more-details">
+                        <summary>Read more</summary>
+
+                        <p>{{ product.details }}</p>
+                    </details>
+                {% endif %}
+            </div>
+
+            {% if product.available %}
+
+                <p class="product-status available">
+                    Available
+                </p>
+
+                <div class="quantity-section">
+                    <label for="product-quantity">
+                        Quantity
+                    </label>
+
+                    <div class="quantity-control">
+                        <button
+                            type="button"
+                            class="quantity-button"
+                            id="decrease-quantity"
+                            aria-label="Decrease quantity"
+                        >
+                            −
+                        </button>
+
+                        <input
+                            type="number"
+                            id="product-quantity"
+                            name="quantity"
+                            value="1"
+                            min="1"
+                            max="10"
+                            readonly
+                        >
+
+                        <button
+                            type="button"
+                            class="quantity-button"
+                            id="increase-quantity"
+                            aria-label="Increase quantity"
+                        >
+                            +
+                        </button>
+                    </div>
+                </div>
+
+                <a
+                    href="{{ url_for('contact', slug=product.slug) }}"
+                    class="product-primary-button"
+                >
+                    Ask About This Piece
+                </a>
+
+                <a
+                    href="{{ url_for('purchase_request', slug=product.slug) }}"
+                    class="product-secondary-button"
+                >
+                    Request to Purchase
+                </a>
+
+            {% else %}
+
+                <p class="product-status sold">
+                    This original piece has sold.
+                </p>
+
+                <a
+                    href="{{ url_for('contact', product=product.slug) }}"
+                    class="product-primary-button"
+                >
+                    Request a Similar Custom Piece
+                </a>
+
+            {% endif %}
+
+            <p class="product-handmade-note">
+                Each item is handmade. Natural variations in form,
+                color, texture, and glaze are part of what makes every
+                piece unique.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+    const quantityInput = document.getElementById("product-quantity");
+    const decreaseButton = document.getElementById("decrease-quantity");
+    const increaseButton = document.getElementById("increase-quantity");
+
+    if (quantityInput && decreaseButton && increaseButton) {
+        decreaseButton.addEventListener("click", function () {
+            const currentQuantity = Number(quantityInput.value);
+            const minimumQuantity = Number(quantityInput.min);
+
+            if (currentQuantity > minimumQuantity) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        });
+
+        increaseButton.addEventListener("click", function () {
+            const currentQuantity = Number(quantityInput.value);
+            const maximumQuantity = Number(quantityInput.max);
+
+            if (currentQuantity < maximumQuantity) {
+                quantityInput.value = currentQuantity + 1;
+            }
+        });
+    }
+</script>
+
+{% endblock %}
