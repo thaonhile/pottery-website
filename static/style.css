@@ -1237,3 +1237,226 @@ footer {
         padding: 75px 20px;
     }
 }
+/* ========================================
+   RESPONSIVE HEADER AND NAVIGATION
+   ======================================== */
+
+.site-header {
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #eee6df;
+}
+
+.navbar {
+    position: relative;
+    width: min(1200px, calc(100% - 48px));
+    min-height: 72px;
+    margin: 0 auto;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+/* Logo */
+
+.logo {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 12px;
+    color: #684638;
+    text-decoration: none;
+}
+
+.logo-image {
+    width: 44px;
+    height: 44px;
+    display: block;
+    flex-shrink: 0;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.logo-text {
+    white-space: nowrap;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* Desktop navigation */
+
+.nav-links {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links li {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    position: relative;
+    display: inline-block;
+    padding: 10px 2px;
+    color: #4d3a31;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #9b5d42;
+}
+
+.nav-links a.active {
+    font-weight: 700;
+}
+
+.nav-links a.active::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 3px;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    margin: auto;
+    background-color: #c57959;
+}
+
+/* Hamburger button hidden on desktop */
+
+.menu-toggle {
+    width: 46px;
+    height: 46px;
+    padding: 10px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    border: 0;
+    border-radius: 6px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 2px;
+    display: block;
+    background-color: #684638;
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+/* ========================================
+   MOBILE HEADER
+   ======================================== */
+
+@media (max-width: 750px) {
+    .navbar {
+        width: 100%;
+        min-height: 70px;
+        padding: 10px 20px;
+        gap: 15px;
+        flex-direction: row;
+    }
+
+    .logo {
+        max-width: calc(100% - 65px);
+        gap: 10px;
+    }
+
+    .logo-image {
+        width: 42px;
+        height: 42px;
+    }
+
+    .logo-text {
+        overflow: hidden;
+        font-size: 1.15rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .menu-toggle {
+        display: flex;
+        flex-shrink: 0;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        width: 100%;
+        padding: 12px 20px 20px;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+        background-color: #ffffff;
+        border-top: 1px solid #eee6df;
+        border-bottom: 1px solid #eee6df;
+        box-shadow: 0 12px 24px rgba(70, 50, 40, 0.1);
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        width: 100%;
+        padding: 15px 4px;
+        display: block;
+        border-bottom: 1px solid #f1ebe6;
+        font-size: 1rem;
+        white-space: normal;
+    }
+
+    .nav-links li:last-child a {
+        border-bottom: 0;
+    }
+
+    .nav-links a.active::after {
+        right: auto;
+        bottom: 7px;
+        left: 4px;
+        width: 28px;
+        margin: 0;
+    }
+
+    /* Turn the hamburger into an X when open */
+
+    .menu-toggle.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+}

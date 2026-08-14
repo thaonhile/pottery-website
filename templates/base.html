@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,36 +13,72 @@
     <header class="site-header">
         <nav class="navbar">
 
+            <!-- Logo -->
             <a href="{{ url_for('home') }}" class="logo">
                 <img
                     src="{{ url_for('static', filename='logo.jpg') }}"
                     alt="Made by Nhi Le logo"
                     class="logo-image"
                 >
-                <span>Made by Nhi Le</span>
+
+                <span class="logo-text">Made by Nhi Le</span>
             </a>
 
-            <ul class="nav-links">
-                <li><a href="{{ url_for('home') }}"
-                        class="{% if request.endpoint == 'home' %}active{% endif %}">Home
+
+            <!-- Mobile Menu Button -->
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="main-navigation"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
+            <!-- Navigation -->
+            <ul class="nav-links" id="main-navigation">
+
+                <li>
+                    <a
+                        href="{{ url_for('home') }}"
+                        class="{% if request.endpoint == 'home' %}active{% endif %}"
+                    >
+                        Home
                     </a>
                 </li>
 
-                <li><a href="{{ url_for('about') }}"
-                        class="{% if request.endpoint == 'about' %}active{% endif %}">About
-                    </a>
-                </li>
-                <li><a href="{{ url_for('gallery') }}"
-                        class="{% if request.endpoint == 'gallery' %}active{% endif %}">Gallery
+                <li>
+                    <a
+                        href="{{ url_for('about') }}"
+                        class="{% if request.endpoint == 'about' %}active{% endif %}"
+                    >
+                        About
                     </a>
                 </li>
 
-                <li><a href="{{ url_for('contact') }}"
-                        class="{% if request.endpoint == 'contact' %}active{% endif %}">Contact Me
+                <li>
+                    <a
+                        href="{{ url_for('gallery') }}"
+                        class="{% if request.endpoint == 'gallery' %}active{% endif %}"
+                    >
+                        Gallery
                     </a>
                 </li>
+
+                <li>
+                    <a
+                        href="{{ url_for('contact') }}"
+                        class="{% if request.endpoint == 'contact' %}active{% endif %}"
+                    >
+                        Contact Me
+                    </a>
+                </li>
+
             </ul>
-
 
         </nav>
     </header>
