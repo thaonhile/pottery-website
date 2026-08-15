@@ -8,31 +8,67 @@
 
 <section class="product-detail-page">
 
+    <!-- Product Navigation -->
+
     <div class="product-navigation">
 
-        <nav class="product-breadcrumbs" aria-label="Breadcrumb">
-            <a href="{{ url_for('home') }}">Home</a>
+        <nav
+            class="product-breadcrumbs"
+            aria-label="Breadcrumb"
+        >
 
-            <span aria-hidden="true">›</span>
+            <a href="{{ url_for('home') }}">
+                Home
+            </a>
 
-            <a href="{{ url_for('gallery') }}">All Products</a>
+            <span aria-hidden="true">
+                ›
+            </span>
 
-            <span aria-hidden="true">›</span>
+            <a href="{{ url_for('gallery') }}">
+                All Products
+            </a>
 
-            <span>{{ product.name }}</span>
+            <span aria-hidden="true">
+                ›
+            </span>
+
+            <span>
+                {{ product.name }}
+            </span>
+
         </nav>
-
-        
 
     </div>
 
+
+    <!-- Product Detail -->
+
     <div class="product-detail-container">
+
+        <!-- Product Image -->
+
         <div class="product-detail-image">
-            <img
-                src="{{ url_for('static', filename=product.image) }}"
-                alt="{{ product.name }}"
-            >
+
+            {% if product.image_url %}
+
+                <img
+                    src="{{ product.image_url }}"
+                    alt="{{ product.name }}"
+                >
+
+            {% else %}
+
+                <div class="product-image-placeholder">
+                    No image available
+                </div>
+
+            {% endif %}
+
         </div>
+
+
+        <!-- Product Information -->
 
         <div class="product-detail-information">
 
@@ -40,27 +76,52 @@
                 {{ product.category }}
             </p>
 
-            <h1>{{ product.name }}</h1>
+            <h1>
+                {{ product.name }}
+            </h1>
 
             <p class="product-sku">
                 SKU: {{ product.sku }}
             </p>
 
             <p class="product-detail-price">
-                ${{ "%.2f"|format(product.price) }}
+                ${{ "%.2f"|format(product.price|float) }}
             </p>
 
+
+            <!-- Description -->
+
             <div class="product-detail-description">
-                <p>{{ product.description }}</p>
+
+                {% if product.description %}
+
+                    <p>
+                        {{ product.description }}
+                    </p>
+
+                {% endif %}
+
 
                 {% if product.details %}
-                    <details class="product-more-details">
-                        <summary>Read more</summary>
 
-                        <p>{{ product.details }}</p>
+                    <details class="product-more-details">
+
+                        <summary>
+                            Read more
+                        </summary>
+
+                        <p>
+                            {{ product.details }}
+                        </p>
+
                     </details>
+
                 {% endif %}
+
             </div>
+
+
+            <!-- Availability -->
 
             {% if product.available %}
 
@@ -68,12 +129,17 @@
                     Available
                 </p>
 
+
+                <!-- Quantity -->
+
                 <div class="quantity-section">
+
                     <label for="product-quantity">
                         Quantity
                     </label>
 
                     <div class="quantity-control">
+
                         <button
                             type="button"
                             class="quantity-button"
@@ -101,15 +167,23 @@
                         >
                             +
                         </button>
+
                     </div>
+
                 </div>
 
+
+                <!-- Ask About Product -->
+
                 <a
-                    href="{{ url_for('contact', slug=product.slug) }}"
+                    href="{{ url_for('contact', product=product.slug) }}"
                     class="product-primary-button"
                 >
                     Ask About This Piece
                 </a>
+
+
+                <!-- Purchase Request -->
 
                 <a
                     href="{{ url_for('purchase_request', slug=product.slug) }}"
@@ -118,7 +192,10 @@
                     Request to Purchase
                 </a>
 
+
             {% else %}
+
+                <!-- Sold Product -->
 
                 <p class="product-status sold">
                     This original piece has sold.
@@ -133,10 +210,15 @@
 
             {% endif %}
 
+
+            <!-- Handmade Note -->
+
             <p class="product-handmade-note">
+
                 Each item is handmade. Natural variations in form,
                 color, texture, and glaze are part of what makes every
                 piece unique.
+
             </p>
 
         </div>
@@ -145,30 +227,69 @@
 
 </section>
 
-<script>
-    const quantityInput = document.getElementById("product-quantity");
-    const decreaseButton = document.getElementById("decrease-quantity");
-    const increaseButton = document.getElementById("increase-quantity");
 
-    if (quantityInput && decreaseButton && increaseButton) {
+<!-- Quantity JavaScript -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const quantityInput =
+            document.getElementById("product-quantity");
+
+        const decreaseButton =
+            document.getElementById("decrease-quantity");
+
+        const increaseButton =
+            document.getElementById("increase-quantity");
+
+
+        if (
+            !quantityInput ||
+            !decreaseButton ||
+            !increaseButton
+        ) {
+            return;
+        }
+
+
         decreaseButton.addEventListener("click", function () {
-            const currentQuantity = Number(quantityInput.value);
-            const minimumQuantity = Number(quantityInput.min);
+
+            const currentQuantity =
+                Number(quantityInput.value);
+
+            const minimumQuantity =
+                Number(quantityInput.min);
+
 
             if (currentQuantity > minimumQuantity) {
-                quantityInput.value = currentQuantity - 1;
+
+                quantityInput.value =
+                    currentQuantity - 1;
+
             }
+
         });
+
 
         increaseButton.addEventListener("click", function () {
-            const currentQuantity = Number(quantityInput.value);
-            const maximumQuantity = Number(quantityInput.max);
+
+            const currentQuantity =
+                Number(quantityInput.value);
+
+            const maximumQuantity =
+                Number(quantityInput.max);
+
 
             if (currentQuantity < maximumQuantity) {
-                quantityInput.value = currentQuantity + 1;
+
+                quantityInput.value =
+                    currentQuantity + 1;
+
             }
+
         });
-    }
+
+    });
 </script>
 
 {% endblock %}

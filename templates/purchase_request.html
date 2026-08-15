@@ -7,6 +7,7 @@ Purchase Request | {{ product.name }}
 {% block content %}
 
 <section class="purchase-request-page">
+
     <div class="purchase-request-container">
 
         <!-- Product Summary -->
@@ -14,11 +15,24 @@ Purchase Request | {{ product.name }}
         <div class="purchase-product-summary">
 
             <div class="purchase-product-image">
-                <img
-                    src="{{ url_for('static', filename=product.image) }}"
-                    alt="{{ product.name }}"
-                >
+
+                {% if product.image_url %}
+
+                    <img
+                        src="{{ product.image_url }}"
+                        alt="{{ product.name }}"
+                    >
+
+                {% else %}
+
+                    <div class="product-image-placeholder">
+                        No image available
+                    </div>
+
+                {% endif %}
+
             </div>
+
 
             <div class="purchase-product-information">
 
@@ -26,7 +40,9 @@ Purchase Request | {{ product.name }}
                     Purchase Request
                 </p>
 
-                <h1>{{ product.name }}</h1>
+                <h1>
+                    {{ product.name }}
+                </h1>
 
                 <p class="purchase-product-sku">
                     SKU: {{ product.sku }}
@@ -37,9 +53,11 @@ Purchase Request | {{ product.name }}
                 </p>
 
                 {% if product.description %}
+
                     <p>
                         {{ product.description }}
                     </p>
+
                 {% endif %}
 
                 <p class="purchase-note">
@@ -53,6 +71,7 @@ Purchase Request | {{ product.name }}
 
         </div>
 
+
         <!-- Purchase Form -->
 
         <div class="purchase-form-area">
@@ -63,7 +82,9 @@ Purchase Request | {{ product.name }}
                     Interested in this piece?
                 </p>
 
-                <h2>Submit a Purchase Request</h2>
+                <h2>
+                    Submit a Purchase Request
+                </h2>
 
                 <p>
                     Complete the form below, and I will contact you
@@ -72,15 +93,19 @@ Purchase Request | {{ product.name }}
 
             </div>
 
+
             <form
                 method="post"
                 action="{{ url_for('purchase_request', slug=product.slug) }}"
                 class="purchase-request-form"
             >
 
+                <!-- Product Information -->
+
                 <div class="form-row">
 
                     <div class="form-group">
+
                         <label for="product_name">
                             Item
                         </label>
@@ -91,9 +116,12 @@ Purchase Request | {{ product.name }}
                             value="{{ product.name }}"
                             readonly
                         >
+
                     </div>
 
+
                     <div class="form-group">
+
                         <label for="sku">
                             SKU number
                         </label>
@@ -104,9 +132,13 @@ Purchase Request | {{ product.name }}
                             value="{{ product.sku }}"
                             readonly
                         >
+
                     </div>
 
                 </div>
+
+
+                <!-- Name -->
 
                 <div class="form-group">
 
@@ -125,6 +157,9 @@ Purchase Request | {{ product.name }}
 
                 </div>
 
+
+                <!-- Email -->
+
                 <div class="form-group">
 
                     <label for="email">
@@ -142,6 +177,9 @@ Purchase Request | {{ product.name }}
 
                 </div>
 
+
+                <!-- Phone -->
+
                 <div class="form-group">
 
                     <label for="phone">
@@ -157,6 +195,9 @@ Purchase Request | {{ product.name }}
                     >
 
                 </div>
+
+
+                <!-- Quantity / Fulfillment -->
 
                 <div class="form-row">
 
@@ -178,6 +219,7 @@ Purchase Request | {{ product.name }}
 
                     </div>
 
+
                     <div class="form-group">
 
                         <label for="fulfillment">
@@ -189,6 +231,7 @@ Purchase Request | {{ product.name }}
                             name="fulfillment"
                             required
                         >
+
                             <option value="">
                                 Select an option
                             </option>
@@ -226,6 +269,9 @@ Purchase Request | {{ product.name }}
 
                 </div>
 
+
+                <!-- Message -->
+
                 <div class="form-group">
 
                     <label for="message">
@@ -240,6 +286,9 @@ Purchase Request | {{ product.name }}
                     >{{ request.form.get('message', '') }}</textarea>
 
                 </div>
+
+
+                <!-- Submit -->
 
                 <button
                     type="submit"
@@ -257,6 +306,7 @@ Purchase Request | {{ product.name }}
         </div>
 
     </div>
+
 </section>
 
 {% endblock %}

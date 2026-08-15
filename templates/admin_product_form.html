@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Product | Made by Nhi Le
+{% endblock %}
+
+{% block content %}
+
+<section class="purchase-request-page">
+    <div class="purchase-form-area">
+
+        <div class="purchase-form-heading">
+            <p class="purchase-eyebrow">
+                Product Administration
+            </p>
+
+            <h1>Add a New Product</h1>
+        </div>
+
+        <form
+            method="post"
+            class="purchase-request-form"
+        >
+            <div class="form-group">
+                <label for="name">Product name</label>
+
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                >
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="slug">URL slug</label>
+
+                    <input
+                        id="slug"
+                        name="slug"
+                        type="text"
+                        placeholder="sandstone-vase"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="sku">SKU</label>
+
+                    <input
+                        id="sku"
+                        name="sku"
+                        type="text"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="category">Category</label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+                        <option value="">
+                            Select a category
+                        </option>
+
+                        <option value="Dinnerware">
+                            Dinnerware
+                        </option>
+
+                        <option value="Home Essentials">
+                            Home Essentials
+                        </option>
+
+                        <option value="Decorative Pottery">
+                            Decorative Pottery
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price</label>
+
+                    <input
+                        id="price"
+                        name="price"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="image_url">Image URL</label>
+
+                <input
+                    id="image_url"
+                    name="image_url"
+                    type="url"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    required
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="details">
+                    Additional details
+                </label>
+
+                <textarea
+                    id="details"
+                    name="details"
+                    rows="5"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input
+                        name="available"
+                        type="checkbox"
+                        checked
+                    >
+                    Available for purchase
+                </label>
+            </div>
+
+            <button
+                type="submit"
+                class="purchase-submit-button"
+            >
+                Add Product
+            </button>
+        </form>
+
+    </div>
+</section>
+
+{% endblock %}
