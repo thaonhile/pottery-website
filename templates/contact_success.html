@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+Message Sent | Made by Nhi Le
+{% endblock %}
+
+{% block content %}
+
+<section class="contact-success-page">
+
+    <div class="contact-success-content">
+
+        <p class="contact-success-eyebrow">
+            Message Sent
+        </p>
+
+        <h1>
+            Thank You for Reaching Out!
+        </h1>
+
+        <p>
+            Your message has been sent successfully.
+            I will review your inquiry and respond as soon as possible.
+        </p>
+
+        <p class="contact-success-note">
+            Please allow 1–2 business days for a response.
+        </p>
+
+        <div class="contact-success-links">
+
+            <a
+                href="{{ url_for('home') }}"
+                class="contact-success-primary"
+            >
+                Return to Home
+            </a>
+
+            <a
+                href="{{ url_for('gallery') }}"
+                class="contact-success-secondary"
+            >
+                Explore the Gallery
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

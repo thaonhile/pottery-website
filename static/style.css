@@ -2269,3 +2269,136 @@ footer {
         padding: 24px 18px;
     }
 }
+/* ========================================
+   CONTACT SUCCESS PAGE
+   ======================================== */
+
+.contact-success-page {
+    min-height: 70vh;
+    padding: 100px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f5ef;
+}
+
+.contact-success-content {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-success-eyebrow {
+    margin: 0 0 15px;
+    color: #a86553;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.contact-success-content h1 {
+    margin: 0 0 25px;
+    color: #493327;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    font-weight: 500;
+    line-height: 1;
+}
+
+.contact-success-content > p:not(.contact-success-eyebrow) {
+    max-width: 620px;
+    margin: 0 auto 20px;
+    color: #57534c;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.contact-success-note {
+    padding-top: 5px;
+    color: #8a7469 !important;
+    font-size: 0.9rem !important;
+}
+
+/* Success page links */
+
+.contact-success-links {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.contact-success-primary,
+.contact-success-secondary {
+    min-width: 210px;
+    padding: 14px 24px;
+    display: inline-block;
+    border: 2px solid #a99577;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+/* Primary button */
+
+.contact-success-primary {
+    color: #ffffff;
+    background-color: #a99577;
+}
+
+.contact-success-primary:hover {
+    color: #ffffff;
+    background-color: #876f52;
+    border-color: #876f52;
+}
+
+/* Secondary button */
+
+.contact-success-secondary {
+    color: #876f52;
+    background-color: transparent;
+}
+
+.contact-success-secondary:hover {
+    color: #ffffff;
+    background-color: #a99577;
+    border-color: #a99577;
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 550px) {
+
+    .contact-success-page {
+        min-height: 70vh;
+        padding: 70px 20px;
+    }
+
+    .contact-success-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .contact-success-content > p:not(.contact-success-eyebrow) {
+        font-size: 1rem;
+    }
+
+    .contact-success-links {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .contact-success-primary,
+    .contact-success-secondary {
+        width: 100%;
+    }
+}
