@@ -2402,3 +2402,468 @@ footer {
         width: 100%;
     }
 }
+/* ========================================
+   ADMIN PRODUCT MANAGEMENT
+   ======================================== */
+
+.admin-products-page {
+    padding: 80px 30px;
+    background-color: #f8f5ef;
+}
+
+.admin-products-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-products-header {
+    margin-bottom: 50px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.admin-products-header h1 {
+    margin: 0 0 12px;
+    color: #493327;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 500;
+}
+
+.admin-add-button,
+.admin-edit-button {
+    display: inline-block;
+    padding: 13px 22px;
+    color: #ffffff;
+    background-color: #a99577;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+}
+
+.admin-add-button:hover,
+.admin-edit-button:hover {
+    color: #ffffff;
+    background-color: #876f52;
+}
+
+.admin-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.admin-product-card {
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.admin-product-image {
+    width: 100%;
+    height: 280px;
+    background-color: #eee7e0;
+}
+
+.admin-product-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.admin-product-details {
+    padding: 24px;
+}
+
+.admin-product-details h2 {
+    margin: 0 0 8px;
+    color: #493327;
+    font-size: 1.4rem;
+}
+
+.admin-product-sku {
+    margin-bottom: 8px;
+    color: #7e7169;
+}
+
+.admin-product-price {
+    margin-bottom: 12px;
+    color: #493327;
+    font-weight: 700;
+}
+
+.admin-status {
+    margin-bottom: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.admin-status.available {
+    color: #50744d;
+}
+
+.admin-status.unavailable {
+    color: #985343;
+}
+
+.admin-product-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-view-link {
+    color: #684638;
+    font-weight: 700;
+}
+
+.admin-current-image {
+    margin-bottom: 25px;
+}
+
+.admin-current-image p {
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.admin-current-image img {
+    width: 180px;
+    height: 180px;
+    display: block;
+    object-fit: contain;
+    background-color: #eee7e0;
+}
+
+.admin-checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-checkbox-label input {
+    width: auto;
+    margin: 0;
+}
+
+.admin-cancel-link {
+    display: block;
+    margin-top: 20px;
+    color: #684638;
+    text-align: center;
+}
+
+.admin-empty-products {
+    padding: 80px 25px;
+    text-align: center;
+}
+
+.admin-empty-products h2 {
+    margin-bottom: 25px;
+    color: #493327;
+}
+
+@media (max-width: 900px) {
+    .admin-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-products-page {
+        padding: 55px 20px;
+    }
+
+    .admin-products-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-add-button {
+        width: 100%;
+    }
+}
+.admin-additional-image-preview {
+    margin-bottom: 30px;
+}
+
+.admin-additional-image-preview > p {
+    margin-bottom: 12px;
+    color: #493327;
+    font-weight: 700;
+}
+
+.admin-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    gap: 15px;
+}
+
+.admin-preview-grid img {
+    width: 120px;
+    height: 120px;
+    display: block;
+    object-fit: contain;
+    background-color: #eee7e0;
+    border: 1px solid #ddd1c7;
+}
+
+@media (max-width: 550px) {
+    .admin-preview-grid {
+        grid-template-columns: repeat(2, 110px);
+    }
+
+    .admin-preview-grid img {
+        width: 110px;
+        height: 110px;
+    }
+}
+/* Product image gallery */
+
+.product-gallery {
+    width: 100%;
+    min-width: 0;
+}
+
+.product-main-image {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #f8f5ef;
+}
+
+.product-main-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+}
+
+.product-image-placeholder {
+    color: #776c65;
+    text-align: center;
+}
+
+.product-thumbnails {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(5, 90px);
+    gap: 12px;
+}
+
+.product-thumbnail {
+    width: 90px;
+    height: 90px;
+    margin: 0;
+    padding: 4px;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 0;
+    background-color: #eee7e0;
+    cursor: pointer;
+}
+
+.product-thumbnail img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.product-thumbnail:hover,
+.product-thumbnail.active {
+    border-color: #684638;
+}
+
+.product-thumbnail.active {
+    border-width: 2px;
+}
+
+@media (max-width: 700px) {
+    .product-main-image {
+        height: 400px;
+    }
+
+    .product-thumbnails {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .product-thumbnail {
+        width: 76px;
+        min-width: 76px;
+        height: 76px;
+    }
+}
+.admin-products-page {
+    padding: 80px 30px;
+    background-color: #f8f5ef;
+}
+
+.admin-products-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-products-header {
+    margin-bottom: 50px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.admin-products-header h1 {
+    margin: 0 0 12px;
+    color: #493327;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 500;
+}
+
+.admin-add-button,
+.admin-edit-button {
+    display: inline-block;
+    padding: 13px 22px;
+    color: #ffffff;
+    background-color: #a99577;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+}
+
+.admin-add-button:hover,
+.admin-edit-button:hover {
+    color: #ffffff;
+    background-color: #876f52;
+}
+
+.admin-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.admin-product-card {
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.admin-product-image {
+    width: 100%;
+    height: 280px;
+    background-color: #eee7e0;
+}
+
+.admin-product-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.admin-product-details {
+    padding: 24px;
+}
+
+.admin-product-details h2 {
+    margin: 0 0 10px;
+    color: #493327;
+    font-size: 1.4rem;
+}
+
+.admin-product-sku,
+.admin-product-id {
+    margin: 0 0 7px;
+    color: #7e7169;
+    font-size: 0.9rem;
+}
+
+.admin-product-price {
+    margin: 12px 0;
+    color: #493327;
+    font-weight: 700;
+}
+
+.admin-status {
+    margin-bottom: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.admin-status.available {
+    color: #50744d;
+}
+
+.admin-status.unavailable {
+    color: #985343;
+}
+
+.admin-product-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.admin-view-link {
+    color: #684638;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-view-link:hover {
+    text-decoration: underline;
+}
+
+.admin-empty-products {
+    padding: 80px 25px;
+    text-align: center;
+}
+
+.admin-empty-products h2 {
+    margin-bottom: 25px;
+    color: #493327;
+}
+
+@media (max-width: 900px) {
+    .admin-product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-products-page {
+        padding: 55px 20px;
+    }
+
+    .admin-products-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-add-button {
+        width: 100%;
+    }
+}

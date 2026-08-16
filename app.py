@@ -114,6 +114,45 @@ class Product(db.Model):
     def __repr__(self):
         return f"<Product {self.name}>"
 
+class ProductImage(db.Model):
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    image_url = db.Column(
+        db.String(500),
+        nullable=False
+    )
+
+    alt_text = db.Column(
+        db.String(200),
+        nullable=True
+    )
+
+    display_order = db.Column(
+        db.Integer,
+        default=0,
+        nullable=False
+    )
+
+    product_id = db.Column(
+        db.Integer,
+        db.ForeignKey("product.id"),
+        nullable=False
+    )
+
+    product = db.relationship(
+        "Product",
+        backref=db.backref(
+            "additional_images",
+            lazy=True,
+            order_by="ProductImage.display_order"
+        )
+    )
+
+    def __repr__(self):
+        return f"<ProductImage {self.image_url}>"
 
 # Create the Product table if it does not already exist.
 # This works with local SQLite and Render PostgreSQL.
@@ -197,6 +236,23 @@ def admin_add_product():
             ""
         ).strip()
 
+        additional_image_urls = [
+            request.form.get(
+                "additional_image_1",
+                ""
+            ).strip(),
+
+            request.form.get(
+                "additional_image_2",
+                ""
+            ).strip(),
+
+            request.form.get(
+                "additional_image_3",
+                ""
+            ).strip(),
+        ]
+
         available = request.form.get("available") == "on"
 
         if (
@@ -275,6 +331,26 @@ def admin_add_product():
 
         try:
             db.session.add(product)
+
+            # Flush saves the product temporarily so product.id is available.
+            db.session.flush()
+
+            for display_order, additional_url in enumerate(
+                additional_image_urls,
+                start=1
+            ):
+                if not additional_url:
+                    continue
+
+                product_image = ProductImage(
+                    image_url=additional_url,
+                    alt_text=product.name,
+                    display_order=display_order,
+                    product_id=product.id
+                )
+
+                db.session.add(product_image)
+
             db.session.commit()
 
         except Exception as error:
@@ -310,7 +386,235 @@ def admin_add_product():
     return render_template(
         "admin_product_form.html"
     )
+@app.route("/admin/products")
+@require_admin
+def admin_products():
+    products = Product.query.order_by(
+        Product.id.desc()
+    ).all()
 
+    return render_template(
+        "admin_products.html",
+        products=products
+    )
+@app.route("/admin/products/<int:product_id>/edit",
+    methods=["GET", "POST"]
+)
+@require_admin
+def admin_edit_product(product_id):
+    product = Product.query.get_or_404(product_id)
+
+    if request.method == "POST":
+        name = request.form.get(
+            "name",
+            ""
+        ).strip()
+
+        slug = request.form.get(
+            "slug",
+            ""
+        ).strip().lower()
+
+        sku = request.form.get(
+            "sku",
+            ""
+        ).strip()
+
+        category = request.form.get(
+            "category",
+            ""
+        ).strip()
+
+        description = request.form.get(
+            "description",
+            ""
+        ).strip()
+
+        details = request.form.get(
+            "details",
+            ""
+        ).strip()
+
+        price_text = request.form.get(
+            "price",
+            ""
+        ).strip()
+
+        image_url = request.form.get(
+            "image_url",
+            ""
+        ).strip()
+
+        additional_image_urls = [
+            request.form.get(
+                "additional_image_1",
+                ""
+            ).strip(),
+
+            request.form.get(
+                "additional_image_2",
+                ""
+            ).strip(),
+
+            request.form.get(
+                "additional_image_3",
+                ""
+            ).strip(),
+            request.form.get(
+                "additional_image_4",
+                ""
+            ).strip(),
+        ]
+
+        available = (
+            request.form.get("available") == "on"
+        )
+
+        # Validate required fields
+        if (
+            not name
+            or not slug
+            or not sku
+            or not category
+            or not description
+            or not price_text
+            or not image_url
+        ):
+            flash(
+                "Please complete all required product fields.",
+                "error"
+            )
+
+            return render_template(
+                "admin_edit_product.html",
+                product=product
+            )
+
+        # Check whether another product uses the same slug
+        duplicate_slug = Product.query.filter(
+            Product.slug == slug,
+            Product.id != product.id
+        ).first()
+
+        if duplicate_slug:
+            flash(
+                "Another product already uses this URL slug.",
+                "error"
+            )
+
+            return render_template(
+                "admin_edit_product.html",
+                product=product
+            )
+
+        # Check whether another product uses the same SKU
+        duplicate_sku = Product.query.filter(
+            Product.sku == sku,
+            Product.id != product.id
+        ).first()
+
+        if duplicate_sku:
+            flash(
+                "Another product already uses this SKU.",
+                "error"
+            )
+
+            return render_template(
+                "admin_edit_product.html",
+                product=product
+            )
+
+        # Validate price
+        try:
+            price = Decimal(price_text)
+
+            if price < 0:
+                raise InvalidOperation
+
+        except (InvalidOperation, ValueError):
+            flash(
+                "Please enter a valid product price.",
+                "error"
+            )
+
+            return render_template(
+                "admin_edit_product.html",
+                product=product
+            )
+
+        # Update main product information
+        product.name = name
+        product.slug = slug
+        product.sku = sku
+        product.category = category
+        product.description = description
+        product.details = details
+        product.price = price
+        product.image_url = image_url
+        product.available = available
+
+        try:
+            # Remove the old additional-image records
+            ProductImage.query.filter_by(
+                product_id=product.id
+            ).delete(
+                synchronize_session=False
+            )
+
+            # Add the current additional-image URLs
+            for display_order, additional_url in enumerate(
+                additional_image_urls,
+                start=1
+            ):
+                if not additional_url:
+                    continue
+
+                product_image = ProductImage(
+                    image_url=additional_url,
+                    alt_text=product.name,
+                    display_order=display_order,
+                    product_id=product.id
+                )
+
+                db.session.add(product_image)
+
+            # Save the product and image changes together
+            db.session.commit()
+
+        except Exception as error:
+            db.session.rollback()
+
+            print(
+                f"Product update error: {repr(error)}",
+                flush=True
+            )
+
+            flash(
+                "The product could not be updated.",
+                "error"
+            )
+
+            return render_template(
+                "admin_edit_product.html",
+                product=product
+            )
+
+        flash(
+            f"{product.name} was updated successfully.",
+            "success"
+        )
+
+        return redirect(
+            url_for("admin_products")
+        )
+
+    additional_images = product.additional_images or []
+
+    return render_template(
+        "admin_edit_product.html",
+        product=product,
+        additional_images=additional_images
+    )
 
 # =========================================================
 # REGULAR WEBSITE PAGES
