@@ -8,30 +8,22 @@
 
 <section class="product-detail-page">
 
-    <!-- Product Navigation -->
-
+    <!-- Breadcrumbs -->
     <div class="product-navigation">
 
-        <nav
-            class="product-breadcrumbs"
-            aria-label="Breadcrumb"
-        >
+        <nav class="product-breadcrumbs" aria-label="Breadcrumb">
 
             <a href="{{ url_for('home') }}">
                 Home
             </a>
 
-            <span aria-hidden="true">
-                ›
-            </span>
+            <span aria-hidden="true">›</span>
 
             <a href="{{ url_for('gallery') }}">
                 All Products
             </a>
 
-            <span aria-hidden="true">
-                ›
-            </span>
+            <span aria-hidden="true">›</span>
 
             <span>
                 {{ product.name }}
@@ -42,25 +34,111 @@
     </div>
 
 
-    <!-- Product Detail -->
-
     <div class="product-detail-container">
 
-        <!-- Product Image -->
 
-        <div class="product-detail-image">
+        <!-- ========================================
+             PRODUCT IMAGE GALLERY
+             ======================================== -->
 
-            {% if product.image_url %}
+        <div class="product-gallery">
 
-                <img
-                    src="{{ product.image_url }}"
-                    alt="{{ product.name }}"
-                >
+    <!-- Main Image -->
+            <div class="product-main-image">
 
-            {% else %}
+                {% if product.image_url %}
 
-                <div class="product-image-placeholder">
-                    No image available
+                    <img
+                        id="product-main-image"
+                        src="{{ product.image_url }}"
+                        alt="{{ product.name }}"
+                    >
+
+                    {% if product.additional_images %}
+
+                        <button
+                            type="button"
+                            class="gallery-arrow gallery-arrow-left"
+                            id="gallery-prev"
+                            aria-label="Previous product image"
+                        >
+                            ‹
+                        </button>
+
+                        <button
+                            type="button"
+                            class="gallery-arrow gallery-arrow-right"
+                            id="gallery-next"
+                            aria-label="Next product image"
+                        >
+                            ›
+                        </button>
+
+                    {% endif %}
+
+                {% else %}
+
+                    <div class="product-image-placeholder">
+                        No image available
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Thumbnails -->
+            {% if product.image_url or product.additional_images %}
+
+                <div class="product-thumbnails">
+
+                    <!-- Main image thumbnail -->
+                    {% if product.image_url %}
+
+                        <button
+                            type="button"
+                            class="product-thumbnail active"
+                            data-image="{{ product.image_url }}"
+                            data-alt="{{ product.name }}"
+                            aria-label="View main image of {{ product.name }}"
+                        >
+
+                            <img
+                                src="{{ product.image_url }}"
+                                alt=""
+                                loading="eager"
+                            >
+
+                        </button>
+
+                    {% endif %}
+
+
+                    <!-- Additional images -->
+                    {% for image in product.additional_images %}
+
+                        {% if image.image_url %}
+
+                            <button
+                                type="button"
+                                class="product-thumbnail"
+                                data-image="{{ image.image_url }}"
+                                data-alt="{{ image.alt_text or product.name }}"
+                                aria-label="View image {{ loop.index + 1 }} of {{ product.name }}"
+                            >
+
+                                <img
+                                    src="{{ image.image_url }}"
+                                    alt=""
+                                    loading="lazy"
+                                >
+
+                            </button>
+
+                        {% endif %}
+
+                    {% endfor %}
+
                 </div>
 
             {% endif %}
@@ -68,7 +146,10 @@
         </div>
 
 
-        <!-- Product Information -->
+
+        <!-- ========================================
+             PRODUCT INFORMATION
+             ======================================== -->
 
         <div class="product-detail-information">
 
@@ -76,52 +157,54 @@
                 {{ product.category }}
             </p>
 
+
             <h1>
                 {{ product.name }}
             </h1>
 
+
             <p class="product-sku">
                 SKU: {{ product.sku }}
             </p>
+
 
             <p class="product-detail-price">
                 ${{ "%.2f"|format(product.price|float) }}
             </p>
 
 
-            <!-- Description -->
+            {% if product.description %}
 
-            <div class="product-detail-description">
-
-                {% if product.description %}
+                <div class="product-detail-description">
 
                     <p>
                         {{ product.description }}
                     </p>
 
-                {% endif %}
+                    {% if product.details %}
+
+                        <details class="product-more-details">
+
+                            <summary>
+                                Read more
+                            </summary>
+
+                            <p>
+                                {{ product.details }}
+                            </p>
+
+                        </details>
+
+                    {% endif %}
+
+                </div>
+
+            {% endif %}
 
 
-                {% if product.details %}
-
-                    <details class="product-more-details">
-
-                        <summary>
-                            Read more
-                        </summary>
-
-                        <p>
-                            {{ product.details }}
-                        </p>
-
-                    </details>
-
-                {% endif %}
-
-            </div>
-
-
-            <!-- Availability -->
+            <!-- ========================================
+                 AVAILABILITY
+                 ======================================== -->
 
             {% if product.available %}
 
@@ -149,6 +232,7 @@
                             −
                         </button>
 
+
                         <input
                             type="number"
                             id="product-quantity"
@@ -158,6 +242,7 @@
                             max="10"
                             readonly
                         >
+
 
                         <button
                             type="button"
@@ -173,36 +258,36 @@
                 </div>
 
 
-                <!-- Ask About Product -->
-
-                <a
-                    href="{{ url_for('contact', product=product.slug) }}"
-                    class="product-primary-button"
-                >
-                    Ask About This Piece
-                </a>
-
-
-                <!-- Purchase Request -->
+                <!-- Purchase -->
 
                 <a
                     href="{{ url_for('purchase_request', slug=product.slug) }}"
-                    class="product-secondary-button"
+                    class="product-primary-button"
                 >
                     Request to Purchase
                 </a>
 
 
-            {% else %}
+                <!-- Contact -->
 
-                <!-- Sold Product -->
+                <a
+                    href="{{ url_for('contact') }}"
+                    class="product-secondary-button"
+                >
+                    Ask About This Piece
+                </a>
+
+
+
+            {% else %}
 
                 <p class="product-status sold">
                     This original piece has sold.
                 </p>
 
+
                 <a
-                    href="{{ url_for('contact', product=product.slug) }}"
+                    href="{{ url_for('contact') }}"
                     class="product-primary-button"
                 >
                     Request a Similar Custom Piece
@@ -210,8 +295,6 @@
 
             {% endif %}
 
-
-            <!-- Handmade Note -->
 
             <p class="product-handmade-note">
 
@@ -228,68 +311,152 @@
 </section>
 
 
-<!-- Quantity JavaScript -->
+<!-- ========================================
+     GALLERY JAVASCRIPT
+     ======================================== -->
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-        const quantityInput =
-            document.getElementById("product-quantity");
+    const mainImage =
+        document.getElementById("product-main-image");
 
-        const decreaseButton =
-            document.getElementById("decrease-quantity");
+    const thumbnails =
+        Array.from(
+            document.querySelectorAll(".product-thumbnail")
+        );
 
-        const increaseButton =
-            document.getElementById("increase-quantity");
+    const previousButton =
+        document.getElementById("gallery-prev");
+
+    const nextButton =
+        document.getElementById("gallery-next");
 
 
-        if (
-            !quantityInput ||
-            !decreaseButton ||
-            !increaseButton
-        ) {
+    if (!mainImage || thumbnails.length === 0) {
+        return;
+    }
+
+
+    let currentIndex = 0;
+
+
+    function showImage(index) {
+
+        if (index < 0) {
+            index = thumbnails.length - 1;
+        }
+
+        if (index >= thumbnails.length) {
+            index = 0;
+        }
+
+
+        currentIndex = index;
+
+
+        const thumbnail =
+            thumbnails[currentIndex];
+
+
+        const imageUrl =
+            thumbnail.dataset.image;
+
+
+        const imageAlt =
+            thumbnail.dataset.alt;
+
+
+        if (!imageUrl) {
             return;
         }
 
 
-        decreaseButton.addEventListener("click", function () {
+        mainImage.src = imageUrl;
 
-            const currentQuantity =
-                Number(quantityInput.value);
-
-            const minimumQuantity =
-                Number(quantityInput.min);
+        mainImage.alt =
+            imageAlt || "{{ product.name }}";
 
 
-            if (currentQuantity > minimumQuantity) {
+        thumbnails.forEach(function (item) {
 
-                quantityInput.value =
-                    currentQuantity - 1;
-
-            }
+            item.classList.remove("active");
 
         });
 
 
-        increaseButton.addEventListener("click", function () {
+        thumbnail.classList.add("active");
 
-            const currentQuantity =
-                Number(quantityInput.value);
-
-            const maximumQuantity =
-                Number(quantityInput.max);
+    }
 
 
-            if (currentQuantity < maximumQuantity) {
+    thumbnails.forEach(function (thumbnail, index) {
 
-                quantityInput.value =
-                    currentQuantity + 1;
+        thumbnail.addEventListener(
+            "click",
+            function () {
+
+                showImage(index);
 
             }
-
-        });
+        );
 
     });
+
+
+    if (previousButton) {
+
+        previousButton.addEventListener(
+            "click",
+            function () {
+
+                showImage(currentIndex - 1);
+
+            }
+        );
+
+    }
+
+
+    if (nextButton) {
+
+        nextButton.addEventListener(
+            "click",
+            function () {
+
+                showImage(currentIndex + 1);
+
+            }
+        );
+
+    }
+
+});
+</script>
+<script>
+    const mainProductImage =
+        document.getElementById("main-product-image");
+
+    const productThumbnails =
+        document.querySelectorAll(".product-thumbnail");
+
+    if (mainProductImage && productThumbnails.length > 0) {
+        productThumbnails.forEach(function (thumbnail) {
+            thumbnail.addEventListener("click", function () {
+                mainProductImage.src =
+                    thumbnail.dataset.image;
+
+                mainProductImage.alt =
+                    thumbnail.dataset.alt;
+
+                productThumbnails.forEach(function (item) {
+                    item.classList.remove("active");
+                });
+
+                thumbnail.classList.add("active");
+            });
+        });
+    }
 </script>
 
 {% endblock %}
