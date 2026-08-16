@@ -467,7 +467,7 @@ def admin_edit_product(product_id):
         ]
 
         available = (
-            request.form.get("available") == "on"
+            request.form.get("available") == "1"
         )
 
         # Validate required fields
