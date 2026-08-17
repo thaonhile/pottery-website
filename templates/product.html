@@ -190,7 +190,7 @@
                 </div>
 
             {% endif %}
-
+            
 
             <!-- ========================================
                  AVAILABILITY
@@ -246,7 +246,23 @@
                     </div>
 
                 </div>
+                <div class="product-handmade-note">
+                    <details class="product-disclaimer">
+                        {% if product.details %}
+                        <summary>Handmade Pottery Disclaimer:</summary>
+                        <p>
+                            Each piece is individually handcrafted and fired in an oxidation atmosphere at approximately 1260°C. 
+                            Because every item is made by hand, slight variations in dimensions, shape, color, texture, and glaze may occur. 
+                            The piece you receive may therefore differ subtly from the photographs shown—these natural variations make each piece unique. 
+                            The pottery is designed to be <strong> food-safe, dishwasher-safe, microwave-safe, and oven-safe </strong> when used with appropriate care. 
+                            Each piece is highly vitrified and made with materials intended for functional ceramic use. These are not mass-produced factory ceramics. 
+                            Every piece has its own individual character and may include subtle marks or variations that reflect the handmade process.
 
+                        </p>
+                        <br>
+                        {% endif %}
+                    </details>
+                </div>
 
                 <!-- Purchase -->
 
@@ -286,23 +302,7 @@
             {% endif %}
 
 
-            <div class="product-handmade-note">
-                <details class="product-disclaimer">
-                    {% if product.details %}
-                    <summary>Handmade Pottery Disclaimer:</summary>
-                    <p>
-                    <br>
-                        Each piece is individually handcrafted and fired in an oxidation atmosphere at approximately 1260°C. 
-                        Because every item is made by hand, slight variations in dimensions, shape, color, texture, and glaze may occur. 
-                        The piece you receive may therefore differ subtly from the photographs shown—these natural variations make each piece unique. 
-                        The pottery is designed to be food-safe, dishwasher-safe, microwave-safe, and oven-safe when used with appropriate care. 
-                        Each piece is highly vitrified and made with materials intended for functional ceramic use. These are not mass-produced factory ceramics. 
-                        Every piece has its own individual character and may include subtle marks or variations that reflect the handmade process.
-                
-                    </p>
-                    {% endif %}
-                </details>
-            </div>
+
 
         </div>
 
