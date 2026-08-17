@@ -32,30 +32,6 @@ Add Product | Made by Nhi Le
                 >
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="slug">URL slug</label>
-
-                    <input
-                        id="slug"
-                        name="slug"
-                        type="text"
-                        placeholder="sandstone-vase"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="sku">SKU</label>
-
-                    <input
-                        id="sku"
-                        name="sku"
-                        type="text"
-                        required
-                    >
-                </div>
-            </div>
 
             <div class="form-row">
                 <div class="form-group">
@@ -200,12 +176,24 @@ Add Product | Made by Nhi Le
                 </label>
             </div>
 
-            <button
-                type="submit"
-                class="purchase-submit-button"
-            >
-                Add Product
-            </button>
+            <div class="form-actions">
+                <button
+                    type="submit"
+                    name="action"
+                    value="gallery"
+                >
+                    Save & Go to Gallery
+                </button>
+
+                <button
+                    type="submit"
+                    name="action"
+                    value="add_another"
+                >
+                    Save & Add Another Product
+                </button>
+            </div>
+
         </form>
 
     </div>
