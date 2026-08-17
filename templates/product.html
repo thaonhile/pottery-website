@@ -176,27 +176,17 @@
             {% if product.description %}
 
                 <div class="product-detail-description">
-
-                    <p>
-                        {{ product.description }}
-                    </p>
-
-                    {% if product.details %}
-
-                        <details class="product-more-details">
-
-                            <summary>
-                                Read more
-                            </summary>
-
-                            <p>
-                                {{ product.details }}
-                            </p>
-
-                        </details>
-
+                    {% if product.description %}
+                        <p>{{ product.description|trim }}</p>
                     {% endif %}
 
+                    {% if product.details %}
+                        <details class="product-more-details">
+                            <summary>Read more</summary>
+
+                            <p>{{ product.details|trim }}</p>
+                        </details>
+                    {% endif %}
                 </div>
 
             {% endif %}

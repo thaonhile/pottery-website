@@ -2,7 +2,7 @@ import os
 from decimal import Decimal, InvalidOperation
 from functools import wraps
 from html import escape
-
+from slugify import slugify
 from flask import (
     Flask,
     Response,
@@ -52,6 +52,34 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
+import random
+import string
+
+
+def generate_sku():
+    while True:
+        characters = string.ascii_uppercase + string.digits
+
+        sku = "SKU-" + "".join(
+            random.choices(characters, k=6)
+        )
+
+        existing_sku = Product.query.filter_by(
+            sku=sku
+        ).first()
+
+        if not existing_sku:
+            return sku
+def generate_unique_slug(name):
+    base_slug = slugify(name)
+    slug = base_slug
+    counter = 2
+
+    while Product.query.filter_by(slug=slug).first():
+        slug = f"{base_slug}-{counter}"
+        counter += 1
+
+    return slug
 
 # =========================================================
 # PRODUCT DATABASE MODEL
@@ -211,9 +239,10 @@ def require_admin(view_function):
 @require_admin
 def admin_add_product():
     if request.method == "POST":
+        action = request.form.get("action", "gallery")
         name = request.form.get("name", "").strip()
-        slug = request.form.get("slug", "").strip().lower()
-        sku = request.form.get("sku", "").strip()
+        slug = generate_unique_slug(name)
+        sku = generate_sku()
         category = request.form.get("category", "").strip()
 
         description = request.form.get(
@@ -287,19 +316,6 @@ def admin_add_product():
                 "admin_product_form.html"
             )
 
-        existing_sku = Product.query.filter_by(
-            sku=sku
-        ).first()
-
-        if existing_sku:
-            flash(
-                "A product with this SKU already exists.",
-                "error"
-            )
-
-            return render_template(
-                "admin_product_form.html"
-            )
 
         try:
             price = Decimal(price_text)
@@ -376,12 +392,18 @@ def admin_add_product():
             "success"
         )
 
+        if action == "add_another":
+            return redirect(
+                url_for("admin_add_product")
+            )
+
         return redirect(
             url_for(
                 "product_detail",
                 slug=product.slug
             )
         )
+
 
     return render_template(
         "admin_product_form.html"

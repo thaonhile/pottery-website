@@ -1715,35 +1715,52 @@ footer {
 }
 
 .product-detail-description {
-    margin-bottom: 25px;
-    color: #453b35;
-    font-size: 1rem;
-    line-height: 1.7;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 20px 0 25px;
+    padding: 0;
+    white-space: normal;
 }
 
 .product-detail-description > p {
+    height: auto;
+    min-height: 0;
     margin: 0 0 12px;
+    padding: 0;
+    white-space: pre-line;
+    line-height: 1.7;
 }
 
-/* Read more */
-
 .product-more-details {
-    margin-top: 12px;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 12px 0 24px;
+    padding: 0;
+    display: block;
+    white-space: normal;
 }
 
 .product-more-details summary {
     width: fit-content;
-    color: #4d372d;
+    margin: 0;
+    padding: 4px 0;
+    display: list-item;
+    color: #684638;
     font-weight: 600;
-    text-decoration: underline;
+    line-height: 1.4;
     cursor: pointer;
 }
 
 .product-more-details p {
-    margin-top: 14px;
+    height: auto;
+    min-height: 0;
+    margin: 12px 0 0;
+    padding: 0;
+    white-space: pre-line;
+    line-height: 1.7;
 }
-
-/* Product availability */
 
 .product-status {
     margin: 0 0 24px;
