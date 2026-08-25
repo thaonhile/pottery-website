@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+Gallery Temporarily Unavailable | Made by Nhi Le
+{% endblock %}
+
+{% block content %}
+
+<section class="gallery-page">
+    <div class="gallery-heading">
+        <h1>The Gallery Is Waking Up</h1>
+
+        <p>
+            The Gallery is temporarily unavailable.
+            Please refresh the page in a few seconds.
+        </p>
+
+        {{ url_for('gallery') }}
+            Try Again
+        </a>
+    </div>
+</section>
+
+{% endblock %}
