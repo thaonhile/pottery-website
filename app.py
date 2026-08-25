@@ -48,8 +48,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] = (
     database_url or "sqlite:///products.db"
 )
 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_pre_ping": True,
+    "pool_recycle": 280,
+    "pool_timeout": 30,
+}
 db = SQLAlchemy(app)
 
 import random
@@ -654,15 +659,24 @@ def about():
 
 @app.route("/gallery")
 def gallery():
-    products = Product.query.order_by(
-        Product.id.desc()
-    ).all()
+    try:
+        products = Product.query.order_by(
+            Product.id.desc()
+        ).all()
 
-    return render_template(
-        "gallery.html",
-        products=products
-    )
+        return render_template(
+            "gallery.html",
+            products=products
+        )
 
+    except Exception as error:
+        app.logger.exception(
+            "Gallery database query failed"
+        )
+
+        return render_template(
+            "gallery_error.html"
+        ), 503
 
 # =========================================================
 # PRODUCT DETAILS
