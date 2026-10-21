@@ -9,6 +9,7 @@ Gallery | Made by Nhi Le
 <section class="gallery-page">
 
     <!-- Gallery Hero -->
+
     <div class="gallery-hero">
 
         <img
@@ -18,25 +19,36 @@ Gallery | Made by Nhi Le
         >
 
         <div class="gallery-hero-statement">
-            <p class="gallery-eyebrow">Made by Hand</p>
 
-            <h1>Beauty Lives in the Details.</h1>
+            <p class="gallery-eyebrow">
+                Made by Hand
+            </p>
+
+            <h1>
+                Beauty Lives in the Details.
+            </h1>
 
             <p>
                 Thoughtful ceramic pieces made to bring warmth,
                 personality, and function into everyday spaces.
             </p>
+
         </div>
 
     </div>
 
 
     <!-- Gallery Introduction -->
+
     <div class="gallery-introduction">
 
-        <p class="gallery-eyebrow">Explore My Work</p>
+        <p class="gallery-eyebrow">
+            Explore My Work
+        </p>
 
-        <h2>Handmade Ceramics for Your Home</h2>
+        <h2>
+            Handmade Ceramics for Your Home
+        </h2>
 
         <p>
             Browse functional pottery, decorative pieces, and creations
@@ -48,59 +60,121 @@ Gallery | Made by Nhi Le
     </div>
 
 
-    <!-- Collection Categories -->
+    <!-- Product Gallery -->
+
     <div class="product-grid">
-    {% for product in products %}
 
-    <article class="product-card">
+        {% for product in products %}
 
-        <a href="{{ url_for('product_detail', slug=product.slug) }}">
-            <div class="product-image">
-                <img
-                    src="{{ url_for('static', filename=product.image) }}"
-                    alt="{{ product.name }}"
-                >
-            </div>
-        </a>
+            <article class="product-card">
 
-        <div class="product-information">
-            <h2 class="product-name">
-                {{ product.name }}
-            </h2>
+                <!-- Product Image -->
 
-            <p class="product-price">
-                ${{ "%.2f"|format(product.price) }}
-            </p>
-
-            {% if product.available %}
                 <a
                     href="{{ url_for('product_detail', slug=product.slug) }}"
-                    class="product-cart-button"
+                    class="product-image-link"
                 >
-                    View Item
-                </a>
-            {% else %}
-                <a
-                    href="{{ url_for('contact') }}"
-                    class="product-cart-button product-sold-button"
-                >
-                    Request Similar Piece
-                </a>
-            {% endif %}
-        </div>
 
-    </article>
+                    <div class="product-image">
 
-    {% endfor %}
-</div>
+                        {% if product.image_url %}
+
+                            <img
+                                src="{{ product.image_url }}"
+                                alt="{{ product.name }}"
+                                loading="lazy"
+                            >
+
+                        {% else %}
+
+                            <div class="product-image-placeholder">
+                                No image available
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </a>
+
+
+                <!-- Product Information -->
+
+                <div class="product-information">
+
+                    <p class="product-category">
+                        {{ product.category }}
+                    </p>
+
+                    <h2 class="product-name">
+                        {{ product.name }}
+                    </h2>
+
+                    <p class="product-price">
+                        ${{ "%.2f"|format(product.price|float) }}
+                    </p>
+
+
+                    {% if product.available %}
+
+                        <a
+                            href="{{ url_for('product_detail', slug=product.slug) }}"
+                            class="product-cart-button"
+                        >
+                            View Item
+                        </a>
+
+                    {% else %}
+
+                        <a
+                            href="{{ url_for('product_detail', slug=product.slug) }}"
+                            class="product-cart-button product-sold-button"
+                        >
+                            Request Similar Piece
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </article>
+
+        {% else %}
+
+            <!-- Empty Gallery -->
+
+            <div class="empty-gallery">
+
+                <h2>
+                    No products are available yet.
+                </h2>
+
+                <p>
+                    Please check back soon for new handmade pottery.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
 
 </section>
+
+
+<!-- Custom Order CTA -->
+
 <section class="custom-home-cta">
+
     <div class="custom-home-cta-content">
 
-        <p class="section-eyebrow">Custom Orders Welcome</p>
+        <p class="section-eyebrow">
+            Custom Orders Welcome
+        </p>
 
-        <h2>Made Specifically for Your Space</h2>
+        <h2>
+            Made Specifically for Your Space
+        </h2>
 
         <p>
             See something that would feel at home in your space?
@@ -116,5 +190,7 @@ Gallery | Made by Nhi Le
         </a>
 
     </div>
+
 </section>
+
 {% endblock %}

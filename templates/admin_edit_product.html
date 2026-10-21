@@ -1,0 +1,406 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit {{ product.name }} | Made by Nhi Le
+{% endblock %}
+
+{% block content %}
+
+<section class="purchase-request-page">
+
+    <div class="purchase-form-area">
+
+        <div class="purchase-form-heading">
+
+            <p class="purchase-eyebrow">
+                Product Administration
+            </p>
+
+            <h1>Edit Product</h1>
+
+            <p>
+                Update the product information and save your changes.
+            </p>
+
+        </div>
+
+
+        <form
+            method="post"
+            action="{{ url_for('admin_edit_product', product_id=product.id) }}"
+            class="purchase-request-form"
+        >
+
+            <!-- PRODUCT NAME -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Product name
+                </label>
+
+                <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    value="{{ product.name or '' }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- SLUG / SKU -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="slug">
+                        URL slug
+                    </label>
+
+                    <input
+                        id="slug"
+                        name="slug"
+                        type="text"
+                        value="{{ product.slug or '' }}"
+                        required
+                    >
+
+                    <small>
+                        Use lowercase letters and hyphens.
+                    </small>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="sku">
+                        SKU number
+                    </label>
+
+                    <input
+                        id="sku"
+                        name="sku"
+                        type="text"
+                        value="{{ product.sku or '' }}"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- CATEGORY / PRICE -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option
+                            value="Dinnerware"
+                            {% if product.category == 'Dinnerware' %}selected{% endif %}
+                        >
+                            Dinnerware
+                        </option>
+
+                        <option
+                            value="Home Essentials"
+                            {% if product.category == 'Home Essentials' %}selected{% endif %}
+                        >
+                            Home Essentials
+                        </option>
+
+                        <option
+                            value="Decorative Pottery"
+                            {% if product.category == 'Decorative Pottery' %}selected{% endif %}
+                        >
+                            Decorative Pottery
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Price
+                    </label>
+
+                    <input
+                        id="price"
+                        name="price"
+                        type="number"
+                        min="0"
+                        step="0.01"
+                        value="{{ product.price or 0 }}"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- MAIN IMAGE -->
+
+            <div class="form-group">
+
+                <label for="image_url">
+                    Main Product Image URL
+                </label>
+
+                <input
+                    id="image_url"
+                    name="image_url"
+                    type="url"
+                    value="{{ product.image_url or '' }}"
+                    placeholder="https://res.cloudinary.com/..."
+                    required
+                >
+
+                <small>
+                    This image appears first in the Gallery
+                    and on the product page.
+                </small>
+
+            </div>
+
+
+            <!-- MAIN IMAGE PREVIEW -->
+
+            <div class="admin-current-image">
+
+                <p>
+                    Current main image:
+                </p>
+
+                {% if product.image_url %}
+
+                    <img
+                        src="{{ product.image_url }}"
+                        alt="{{ product.name }}"
+                        class="admin-product-image-preview"
+                    >
+
+                {% else %}
+
+                    <p>
+                        No main image has been added.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- ADDITIONAL IMAGE 1 -->
+
+            <div class="form-group">
+
+                <label for="additional_image_1">
+                    Additional Image 1
+                </label>
+
+                <input
+                    id="additional_image_1"
+                    name="additional_image_1"
+                    type="url"
+                    value="{% if product.additional_images and product.additional_images|length > 0 %}{{ product.additional_images[0].image_url or '' }}{% endif %}"
+                    placeholder="https://res.cloudinary.com/..."
+                >
+
+            </div>
+
+
+            <!-- ADDITIONAL IMAGE 2 -->
+
+            <div class="form-group">
+
+                <label for="additional_image_2">
+                    Additional Image 2
+                </label>
+
+                <input
+                    id="additional_image_2"
+                    name="additional_image_2"
+                    type="url"
+                    value="{% if product.additional_images and product.additional_images|length > 1 %}{{ product.additional_images[1].image_url or '' }}{% endif %}"
+                    placeholder="https://res.cloudinary.com/..."
+                >
+
+            </div>
+
+
+            <!-- ADDITIONAL IMAGE 3 -->
+
+            <div class="form-group">
+
+                <label for="additional_image_3">
+                    Additional Image 3
+                </label>
+
+                <input
+                    id="additional_image_3"
+                    name="additional_image_3"
+                    type="url"
+                    value="{% if product.additional_images and product.additional_images|length > 2 %}{{ product.additional_images[2].image_url or '' }}{% endif %}"
+                    placeholder="https://res.cloudinary.com/..."
+                >
+
+            </div>
+
+
+            <!-- ADDITIONAL IMAGE 4 -->
+
+            <div class="form-group">
+
+                <label for="additional_image_4">
+                    Additional Image 4
+                </label>
+
+                <input
+                    id="additional_image_4"
+                    name="additional_image_4"
+                    type="url"
+                    value="{% if product.additional_images and product.additional_images|length > 3 %}{{ product.additional_images[3].image_url or '' }}{% endif %}"
+                    placeholder="https://res.cloudinary.com/..."
+                >
+
+            </div>
+
+
+            <!-- ADDITIONAL IMAGE PREVIEW -->
+
+            <div class="admin-additional-image-preview">
+
+                <p>
+                    Current additional images:
+                </p>
+
+                <div class="admin-preview-grid">
+
+                    {% if product.additional_images %}
+
+                        {% for image in product.additional_images %}
+
+                            {% if image.image_url %}
+
+                                <img
+                                    src="{{ image.image_url }}"
+                                    alt="{{ image.alt_text or product.name }}"
+                                    class="admin-product-image-preview"
+                                >
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p>
+                            No additional images have been added.
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="form-group">
+
+                <label for="description">
+                    Short description
+                </label>
+
+                <textarea
+                    id="description"
+                    name="description"
+                    rows="4"
+                    required
+                >{{ product.description or '' }}</textarea>
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div class="form-group">
+
+                <label for="details">
+                    Additional details
+                </label>
+
+                <textarea
+                    id="details"
+                    name="details"
+                    rows="6"
+                >{{ product.details or '' }}</textarea>
+
+            </div>
+
+
+            <!-- AVAILABILITY -->
+
+            <div class="form-group">
+
+                <label for="available">
+                    Available for purchase
+                </label>
+
+                <input
+                    id="available"
+                    name="available"
+                    type="checkbox"
+                    value="1"
+                    {% if product.available %}checked{% endif %}
+                >
+
+            </div>
+
+
+            <!-- SAVE -->
+
+            <button
+                type="submit"
+                class="purchase-submit-button"
+            >
+                Save Product Changes
+            </button>
+
+
+            <!-- CANCEL -->
+
+            <a
+                href="{{ url_for('product_detail', slug=product.slug) }}"
+                class="admin-cancel-link"
+            >
+                Cancel and return to product
+            </a>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}
