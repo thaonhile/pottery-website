@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Ping Website
         run: |
-          curl -s -o /dev/null -w "%{http_code}" https://madebynhile.com
+          curl -s -o /dev/null -w "%{http_code}" https://madebynhile.com/
