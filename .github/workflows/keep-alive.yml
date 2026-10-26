@@ -2,7 +2,7 @@ name: Keep Website Awake
 
 on:
   schedule:
-    - cron: "*/14 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
